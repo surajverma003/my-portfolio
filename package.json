@@ -1,6 +1,6 @@
 {
 	"name": "my-portfolio",
-	"homepage": "https://surajverma003.github.io/",
+	"homepage": "https://surajverma003.github.io/my-portfolio/",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -19,6 +19,10 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/surajverma003/my-portfolio.git"
 	},
 	"eslintConfig": {
 		"extends": [

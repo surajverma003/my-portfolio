@@ -1,0 +1,89 @@
+
+body {
+    background: #121212;
+}
+
+aside {
+    width: 20rem !important;
+}
+
+.linearGradientSowContacts {
+    background: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 70%);
+}
+
+.shadowIcon {
+    box-shadow: -0 -0 12px -5px #fff !important;
+}
+
+.lightShadow {
+    box-shadow: rgba(204, 219, 232, 0.185) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.164) -3px -3px 6px 1px inset;
+}
+
+
+
+
+
+/* -----------------> scroll bar design <----------------- */
+.scroll::-webkit-scrollbar {
+    width: 20px;
+    height: 5px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: #ffdb70;
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: #ffdb70a4;
+}
+
+.has-scrollbar::-webkit-scrollbar-button {
+    width: 20px;
+}
+
+
+/* -----------------> radius <----------------- */
+.navRadius {
+    border-end-start-radius: 19px;
+    border-start-end-radius: 19px;
+}
+
+.navRadius-2 {
+    border-end-start-radius: 19px;
+}
+
+
+
+
+
+
+
+
+/* -----------------> media query <----------------- */
+
+@media only screen and (max-width:1280px) {
+
+    aside {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width:768px) {
+
+    .navRadius {
+        border-radius: 0 0 19px 19px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    .navRadius {
+        border-radius: 0 0 19px 19px;
+    }
+}

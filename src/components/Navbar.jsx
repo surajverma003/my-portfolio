@@ -3,24 +3,31 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const path = useLocation();
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
-    useEffect(()=>{
-        window.scrollTo(0,0);
-      },[])
+    const items = [
+        { path: '/about', label: 'About' },
+        { path: '/resume', label: 'Resume' },
+        { path: '/portfolio', label: 'Portfolio' },
+        { path: '/blog', label: 'Blog' },
+        { path: '/contact', label: 'Contact' }
+    ];
 
     return (
-        <ul id='list' className='navRadius poppins fixed md:absolute top-0 right-0 z-10 flex justify-center md:justify-start items-center gap-3 sm:gap-8 px-7 py-5 bg-[#2b2b2cbf] border border-neutral-700 w-full md:w-fit backdrop-blur-lg md:backdrop-blur-none'>
-
-            <Link to="/about"><li className={`text-sm sm:text-[16px] ${path.pathname === '/about' ? 'text-[#ffdb70]' : 'text-neutral-400'} ${path.pathname === '/about' ? 'hover:text-[#ffdb70b4]' : 'hover:text-white'} w-fit transition-all`}>About</li></Link>
-
-            <Link to="/resume"><li className={`text-sm sm:text-[16px] ${path.pathname === '/resume' ? 'text-[#ffdb70]' : 'text-neutral-400'} ${path.pathname === '/resume' ? 'hover:text-[#ffdb70b4]' : 'hover:text-white'} w-fit transition-all`}>Resume</li></Link>
-
-            <Link to="/portfolio"><li className={`text-sm sm:text-[16px] ${path.pathname === '/portfolio' ? 'text-[#ffdb70]' : 'text-neutral-400'} ${path.pathname === '/portfolio' ? 'hover:text-[#ffdb70b4]' : 'hover:text-white'} w-fit transition-all`}>Portfolio</li></Link>
-
-            <Link to="/blog"><li className={`text-sm sm:text-[16px] ${path.pathname === '/blog' ? 'text-[#ffdb70]' : 'text-neutral-400'} ${path.pathname === '/blog' ? 'hover:text-[#ffdb70b4]' : 'hover:text-white'} w-fit transition-all`}>Blog</li></Link>
-
-            <Link to="/contact"><li className={`text-sm sm:text-[16px] ${path.pathname === '/contact' ? 'text-[#ffdb70]' : 'text-neutral-400'} ${path.pathname === '/contact' ? 'hover:text-[#ffdb70b4]' : 'hover:text-white'} w-fit transition-all`}>Contact</li></Link>
-        </ul>
+        <nav className='navRadius poppins fixed md:absolute top-0 right-0 z-10 w-full md:w-fit uppercase'>
+            <ul className='flex justify-center md:justify-start items-center gap-1 sm:gap-2 px-4 sm:px-7 py-4 sm:py-5 bg-white/95 dark:bg-neutral-900/95 border border-teal-200 dark:border-neutral-700 rounded-ee-3xl md:rounded-ee-none md:rounded-se-2xl rounded-bl-3xl'>
+                {items.map((item) => {
+                    const isActive = path.pathname === item.path;
+                    return (
+                        <li key={item.path}>
+                            <Link to={item.path} className={`relative px-1 sm:px-5 py-2 sm:py-2.5 text-sm :text-base font-semibold transition-all duration-300 block ${isActive ? 'text-teal-600 dark:text-orange-400' : 'text-gray-700 dark:text-neutral-400 hover:text-teal-600 dark:hover:text-orange-400'}`}>
+                                {item.label}
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        </nav>
     )
 }
 

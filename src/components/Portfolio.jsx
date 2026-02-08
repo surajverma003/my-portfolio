@@ -8,96 +8,93 @@ const Portfolio = () => {
     const [hide, setHide] = useState('hidden');
     const [changeIcon, setChangeIcon] = useState('up');
 
-    const colorText = (e) => {
-        removeTextColor();
-        setList(e.target.innerText);
-        e.target.style.color = '#ffdb70';
+    const categories = ['All', 'Web design', 'Applications', 'Web development'];
+
+    const colorText = (category) => {
+        setList(category);
         setHide('hidden');
-    }
-
-    const removeTextColor = () => {
-        document.getElementById('All').style.color = "#d4d4d4";
-        document.getElementById('Web design').style.color = "#d4d4d4";
-        document.getElementById('Applications').style.color = "#d4d4d4";
-        document.getElementById('Web development').style.color = "#d4d4d4";
-
-        document.querySelector('.c_1').style.color = "#d4d4d4";
-        document.querySelector('.c_2').style.color = "#d4d4d4";
-        document.querySelector('.c_3').style.color = "#d4d4d4";
-        document.querySelector('.c_4').style.color = "#d4d4d4";
     }
 
     const showCategory = () => {
         setHide(hide === 'hidden' ? 'block' : 'hidden');
         setChangeIcon(changeIcon === 'up' ? 'down' : 'up');
     }
-    
+
     return (
         <div className='relative w-full'>
             <Navbar />
 
             {/* main component */}
-            <main className='p-4 sm:p-7 bg-[#1e1e1f] border border-neutral-700 text-white rounded-2xl'>
-                <h1 className="text-3xl sm:text-4xl font-semibold">Portfolio</h1>
-                <hr className="border-2 border-[#ffdb70] rounded-sm w-12 my-5" />
+            <main className='p-4 sm:p-7 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-[#1a1a1b] dark:to-[#1e1e1f] border border-teal-200 dark:border-neutral-700 text-gray-900 dark:text-white rounded-2xl shadow-sm'>
 
-                <div className="relative md:hidden">
-                    <button onClick={showCategory} type="button" className='flex justify-between items-center px-4 py-2.5 border border-neutral-700 bg-transparent rounded-xl w-full mb-2 text-sm sm:text-[16px]'>
+                {/* Header Section */}
+                <div className="mb-3">
+                    <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 dark:from-orange-400 dark:to-rose-400 bg-clip-text text-transparent">Portfolio</h1>
+                </div>
+                <hr className="border-2 border-teal-600 dark:border-orange-400 rounded-full w-16 mb-8" />
+
+                {/* Mobile Filter Dropdown */}
+                <div className="relative md:hidden mb-8">
+                    <button onClick={showCategory} type="button" className='flex justify-between items-center px-5 py-3 border-2 border-teal-200 dark:border-neutral-700 bg-white dark:bg-neutral-800/60 hover:border-teal-400 dark:hover:border-orange-400 rounded-xl w-full text-sm sm:text-base font-semibold text-gray-800 dark:text-white transition-all duration-300 shadow-sm'>
                         <span>{list}</span>
-                        <span><Icon icon={`mingcute:${changeIcon}-fill`} width="24" height="24"></Icon></span>
+                        <Icon icon={`solar:alt-arrow-${changeIcon}-bold`} width="20" height="20" className="text-teal-600 dark:text-orange-400" />
                     </button>
 
-                    <ul className={`${hide} text-neutral-300 absolute top-13 w-full p-2.5 border border-neutral-700 bg-[#1e1e1f] rounded-xl text-sm sm:text-[16px]`}>
-                        <li onClick={colorText} className='px-4 py-2.5 rounded-lg hover:bg-neutral-700 transition-all' id='All'>All</li>
-                        <li onClick={colorText} className='px-4 py-2.5 rounded-lg hover:bg-neutral-700 transition-all' id='Web design'>Web design</li>
-                        <li onClick={colorText} className='px-4 py-2.5 rounded-lg hover:bg-neutral-700 transition-all' id='Applications'>Applications</li>
-                        <li onClick={colorText} className='px-4 py-2.5 rounded-lg hover:bg-neutral-700 transition-all' id='Web development'>Web development</li>
+                    <ul className={`${hide} absolute top-14 w-full p-2 border-2 border-teal-200 dark:border-neutral-700 bg-white dark:bg-neutral-800/95 backdrop-blur-sm rounded-xl text-sm sm:text-base shadow-xl z-10`}>
+                        {categories.map((category, index) => (
+                            <li key={index} onClick={() => colorText(category)} className={`px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 font-medium ${list === category ? 'bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-orange-500 dark:to-rose-500 text-white' : 'text-gray-700 dark:text-neutral-300 hover:bg-teal-50 dark:hover:bg-neutral-700'}`}>{category}</li>
+                        ))}
                     </ul>
                 </div>
 
-                <ul className='hidden md:flex items-center justify-start gap-10 text-neutral-300 px-3 mb-7'>
-                    <li className='c_1 text-[#ffdb70] hover:text-neutral-400 transition-all' onClick={colorText}>All</li>
-                    <li className='c_2 hover:text-neutral-400 transition-all' onClick={colorText}>Web design</li>
-                    <li className='c_3 hover:text-neutral-400 transition-all' onClick={colorText}>Applications</li>
-                    <li className='c_4 hover:text-neutral-400 transition-all' onClick={colorText}>Web development</li>
-                </ul>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 my-5 text-sm sm:text-[16px]">
-                    {
-                        elements.map((item, index) => {
-                            if (item.type === list) {
-                                return (
-                                    <Link to="/" key={index} className="">
-                                        <div className="overflow-hidden rounded-2xl">
-                                            <img className='hover:scale-[1.14] transition-all rounded-xl ' src={item.imgage} alt="" />
-                                        </div>
-                                        <div className="flex flex-col justify-center items-start gap-1 mt-3 ps-2">
-                                            <h4 className="">{item.title}</h4>
-                                            <p className="text-[16px] text-neutral-400">{item.type}</p>
-                                        </div>
-                                    </Link>
-                                )
-                            }
-
-                            else if (list === 'All') {
-                                return (
-                                    <Link to="/" key={index} className="">
-                                        <div className="overflow-hidden rounded-2xl">
-                                            <img className='hover:scale-[1.14] transition-all rounded-xl ' src={item.imgage} alt="" />
-                                        </div>
-                                        <div className="flex flex-col justify-center items-start gap-1 mt-3 ps-2">
-                                            <h4 className="">{item.title}</h4>
-                                            <p className="text-[16px] text-neutral-400">{item.type}</p>
-                                        </div>
-                                    </Link>
-                                )
-                            }
-
-                            return '';
-                        })
-                    }
+                {/* Desktop Filter Tabs */}
+                <div className='hidden md:flex items-center justify-start gap-3 mb-10 flex-wrap'>
+                    {categories.map((category, index) => (
+                        <button key={index} onClick={() => colorText(category)} className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${list === category ? 'bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-orange-500 dark:to-rose-500 text-white shadow-lg shadow-teal-500/30 dark:shadow-orange-500/30' : 'bg-white dark:bg-neutral-800/60 text-gray-700 dark:text-neutral-300 border-2 border-teal-100 dark:border-neutral-700 hover:border-teal-400 dark:hover:border-orange-400'}`}>{category}</button>
+                    ))}
                 </div>
 
+                {/* Portfolio Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {elements.map((item, index) => {
+                        if (item.type === list || list === 'All') {
+                            return (
+                                <Link to="/" key={index} className="group">
+                                    <div className="relative bg-white dark:bg-neutral-800/60 backdrop-blur-sm rounded-2xl border-2 border-teal-100 dark:border-neutral-700 hover:border-teal-400 dark:hover:border-orange-400 overflow-hidden hover:shadow-xl hover:shadow-teal-100 dark:hover:shadow-orange-500/10 transition-all duration-300 hover:-translate-y-0.5">
+
+                                        {/* Image Container */}
+                                        <div className="relative overflow-hidden aspect-[4/3]">
+                                            <img className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' src={item.imgage} alt={item.title} />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="p-5">
+                                            <h4 className="text-base sm:text-lg font-bold text-gray-800 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-orange-400 transition-colors duration-300">{item.title}</h4>
+                                            <div className="flex items-center gap-2">
+                                                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm bg-teal-100 dark:bg-orange-500/20 text-teal-700 dark:text-orange-300 px-3 py-1 rounded-full font-semibold">
+                                                    <Icon icon="solar:tag-bold" width="14" height="14" />
+                                                    {item.type}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Corner decoration */}
+                                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-teal-400/10 to-transparent dark:from-orange-400/10 rounded-bl-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+                                </Link>
+                            )
+                        }
+                        return null;
+                    })}
+                </div>
+
+                {/* Empty State */}
+                {elements.filter(item => item.type === list || list === 'All').length === 0 && (
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <Icon icon="solar:folder-open-bold-duotone" width="80" height="80" className="text-gray-300 dark:text-neutral-700 mb-4" />
+                        <p className="text-gray-500 dark:text-neutral-400 text-lg">No projects found in this category</p>
+                    </div>
+                )}
             </main>
         </div>
     )

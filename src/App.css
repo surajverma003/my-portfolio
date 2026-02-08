@@ -1,54 +1,97 @@
-
+/* -----------------> Global Styles <----------------- */
 body {
-    background: #121212;
+    background: linear-gradient(to bottom right, #f8fafc, #f0fdfa);
+    transition: background-color 0.3s ease;
+}
+
+.dark body {
+    background: linear-gradient(to bottom right, #0a0a0a, #1a1a1a);
 }
 
 aside {
     width: 20rem !important;
 }
 
+/* -----------------> Gradients <----------------- */
 .linearGradientSowContacts {
-    background: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 70%);
+    background: linear-gradient(to bottom right, 
+        rgba(20, 184, 166, 0.1) 0%, 
+        rgba(20, 184, 166, 0) 70%
+    );
 }
 
+.dark .linearGradientSowContacts {
+    background: linear-gradient(to bottom right, 
+        rgba(251, 146, 60, 0.1) 0%, 
+        rgba(251, 146, 60, 0) 70%
+    );
+}
+
+/* -----------------> Shadows <----------------- */
 .shadowIcon {
-    box-shadow: -0 -0 12px -5px #fff !important;
+    box-shadow: 0 0 20px -5px rgba(20, 184, 166, 0.4);
+}
+
+.dark .shadowIcon {
+    box-shadow: 0 0 20px -5px rgba(251, 146, 60, 0.4);
 }
 
 .lightShadow {
-    box-shadow: rgba(204, 219, 232, 0.185) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.164) -3px -3px 6px 1px inset;
+    box-shadow: 
+        rgba(20, 184, 166, 0.1) 3px 3px 8px 0px inset, 
+        rgba(6, 182, 212, 0.15) -3px -3px 8px 1px inset;
 }
 
+.dark .lightShadow {
+    box-shadow: 
+        rgba(251, 146, 60, 0.1) 3px 3px 8px 0px inset, 
+        rgba(251, 113, 133, 0.15) -3px -3px 8px 1px inset;
+}
 
-
-
-
-/* -----------------> scroll bar design <----------------- */
+/* -----------------> Scrollbar Design <----------------- */
 .scroll::-webkit-scrollbar {
-    width: 20px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
+}
+
+.scroll.height-fix::-webkit-scrollbar {
+    height: 4px !important;
 }
 
 .scroll::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
+    background: #f0fdfa;
     border-radius: 10px;
+}
+
+.dark .scroll::-webkit-scrollbar-track {
+    background: #1f2937;
+    box-shadow: inset 0 0 5px rgba(251, 146, 60, 0.1);
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background: #ffdb70;
+    background: linear-gradient(to bottom, #14b8a6, #06b6d4);
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .scroll::-webkit-scrollbar-thumb:hover {
-    background: #ffdb70a4;
+    background: linear-gradient(to bottom, #0d9488, #0891b2);
+    transform: scale(1.1);
+}
+
+.dark .scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #fb923c, #fb7185);
+}
+
+.dark .scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #f97316, #f43f5e);
 }
 
 .has-scrollbar::-webkit-scrollbar-button {
     width: 20px;
 }
 
-
-/* -----------------> radius <----------------- */
+/* -----------------> Border Radius <----------------- */
 .navRadius {
     border-end-start-radius: 19px;
     border-start-end-radius: 19px;
@@ -58,32 +101,230 @@ aside {
     border-end-start-radius: 19px;
 }
 
+/* -----------------> Animations <----------------- */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
 
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
 
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
 
+.animate-pulse-slow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
 
-
-
-
-/* -----------------> media query <----------------- */
-
-@media only screen and (max-width:1280px) {
-
+/* -----------------> Media Queries <----------------- */
+@media only screen and (max-width: 1280px) {
     aside {
         width: 100% !important;
     }
 }
 
-@media only screen and (max-width:768px) {
-
+@media only screen and (max-width: 768px) {
     .navRadius {
         border-radius: 0 0 19px 19px;
     }
 }
 
-@media only screen and (max-width:480px) {
-
+@media only screen and (max-width: 480px) {
     .navRadius {
         border-radius: 0 0 19px 19px;
+    }
+    
+    .scroll::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* -----------------> Leaflet Map Styling <----------------- */
+.leaflet-container {
+    z-index: 1;
+    border-radius: 16px;
+}
+
+/* Zoom controls styling */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+    background: linear-gradient(to bottom right, #14b8a6, #06b6d4) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(20, 184, 166, 0.3) !important;
+    border-radius: 12px !important;
+    font-weight: bold !important;
+    transition: all 0.3s ease !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+    background: linear-gradient(to bottom right, #0d9488, #0891b2) !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3) !important;
+}
+
+html.dark .leaflet-control-zoom-in,
+html.dark .leaflet-control-zoom-out {
+    background: linear-gradient(to bottom right, #fb923c, #fb7185) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+html.dark .leaflet-control-zoom-in:hover,
+html.dark .leaflet-control-zoom-out:hover {
+    background: linear-gradient(to bottom right, #f97316, #f43f5e) !important;
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.3) !important;
+}
+
+/* Leaflet controls container */
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.dark .leaflet-control-zoom {
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.2) !important;
+}
+
+/* Attribution styling */
+.leaflet-control-attribution {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    font-size: 10px !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+    border: 1px solid rgba(20, 184, 166, 0.2) !important;
+}
+
+html.dark .leaflet-control-attribution {
+    background-color: rgba(23, 23, 23, 0.95) !important;
+    color: #d4d4d4 !important;
+    border: 1px solid rgba(251, 146, 60, 0.2) !important;
+}
+
+html.dark .leaflet-control-attribution a {
+    color: #fb923c !important;
+}
+
+.leaflet-control-attribution a:hover {
+    color: #0d9488 !important;
+}
+
+html.dark .leaflet-control-attribution a:hover {
+    color: #f97316 !important;
+}
+
+/* Popup styling */
+.leaflet-popup-content-wrapper {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    color: #1f2937 !important;
+    border-radius: 16px !important;
+    padding: 8px !important;
+    box-shadow: 0 8px 24px rgba(20, 184, 166, 0.2) !important;
+    border: 2px solid rgba(20, 184, 166, 0.3) !important;
+}
+
+html.dark .leaflet-popup-content-wrapper {
+    background-color: rgba(23, 23, 23, 0.98) !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 24px rgba(251, 146, 60, 0.2) !important;
+    border: 2px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+.leaflet-popup-tip {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+}
+
+html.dark .leaflet-popup-tip {
+    background-color: rgba(23, 23, 23, 0.98) !important;
+}
+
+.leaflet-popup-content {
+    margin: 8px 12px !important;
+    font-weight: 600 !important;
+}
+
+/* Marker styling */
+.leaflet-marker-icon {
+    filter: drop-shadow(0 4px 8px rgba(20, 184, 166, 0.4));
+}
+
+html.dark .leaflet-marker-icon {
+    filter: drop-shadow(0 4px 8px rgba(251, 146, 60, 0.4));
+}
+
+/* -----------------> Custom Utilities <----------------- */
+.text-gradient {
+    background: linear-gradient(to right, #14b8a6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dark .text-gradient {
+    background: linear-gradient(to right, #fb923c, #fb7185);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(to bottom right, #14b8a6, #06b6d4);
+}
+
+.dark .bg-gradient-primary {
+    background: linear-gradient(to bottom right, #fb923c, #fb7185);
+}
+
+/* -----------------> Selection Styling <----------------- */
+::selection {
+    background-color: rgba(20, 184, 166, 0.3);
+    color: #0f766e;
+}
+
+html.dark ::selection {
+    background-color: rgba(251, 146, 60, 0.3);
+    color: #fb923c;
+}
+
+/* -----------------> Focus Styles <----------------- */
+*:focus-visible {
+    outline: 2px solid #14b8a6;
+    outline-offset: 2px;
+}
+
+html.dark *:focus-visible {
+    outline: 2px solid #fb923c;
+}
+
+/* -----------------> Smooth Scrolling <----------------- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* -----------------> Print Styles <----------------- */
+@media print {
+    body {
+        background: white !important;
+    }
+    
+    .fixed,
+    button {
+        display: none !important;
     }
 }
